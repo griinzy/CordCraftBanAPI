@@ -1,0 +1,6 @@
+@CordCraftBanAPI_HostAddress = http://localhost:5092
+
+GET {{CordCraftBanAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
