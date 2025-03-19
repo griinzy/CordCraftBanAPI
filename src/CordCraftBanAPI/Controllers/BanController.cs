@@ -25,7 +25,13 @@ namespace CordCraftBanAPI.Controllers
         public async Task<ActionResult<Ban>> GetBan(string uuid)
         {
             var ban = await _context.Bans.FirstOrDefaultAsync(b => b.UUID == uuid);
-            if (ban == null) return NotFound();
+            if (ban == null) 
+                return NotFound();
+            if (DateTime.Now > ban.ExpiresAt)
+            {
+                await DeleteBan(uuid);
+                return NoContent();
+            }
             return ban;
         }
 
