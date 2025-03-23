@@ -1,4 +1,5 @@
 
+using CordCraftBanAPI.ApiKey;
 using CordCraftBanAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,12 @@ namespace CordCraftBanAPI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<BanDbContext>(options => options.UseSqlite("Data source=bans.db"));
+
+            builder.Services.AddScoped<ApiKeyAuthFilter>();
+
+            builder.Services.AddTransient<IApiKeyValidation, ApiKeyValidation>();
+
+            builder.Services.AddHttpContextAccessor();
 
             // Add services to the container.
 

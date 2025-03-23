@@ -1,4 +1,5 @@
-﻿using CordCraftBanAPI.Data;
+﻿using CordCraftBanAPI.ApiKey;
+using CordCraftBanAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,12 +16,14 @@ namespace CordCraftBanAPI.Controllers
             _context = context;
         }
 
+        [ApiKey]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ban>>> GetBans()
         {
             return await _context.Bans.ToListAsync();
         }
 
+        [ApiKey]
         [HttpGet("{uuid}")]
         public async Task<ActionResult<Ban>> GetBan(string uuid)
         {
@@ -35,6 +38,7 @@ namespace CordCraftBanAPI.Controllers
             return ban;
         }
 
+        [ApiKey]
         [HttpPost]
         public async Task<ActionResult<Ban>> AddBan(Ban ban)
         {
@@ -43,6 +47,7 @@ namespace CordCraftBanAPI.Controllers
             return CreatedAtAction(nameof(GetBan), new { uuid = ban.UUID }, ban);
         }
 
+        [ApiKey]
         [HttpDelete("{uuid}")]
         public async Task<IActionResult> DeleteBan(string uuid)
         {
