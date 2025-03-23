@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="apikeys.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="bans.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

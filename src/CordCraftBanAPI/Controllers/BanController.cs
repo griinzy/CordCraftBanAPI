@@ -20,6 +20,12 @@ namespace CordCraftBanAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ban>>> GetBans()
         {
+            List<Ban> expiredBans = await _context.Bans.Where(b => DateTime.Now > b.ExpiresAt).ToListAsync();
+            foreach(Ban ban in expiredBans)
+            {
+                await DeleteBan(ban.UUID);
+            }
+
             return await _context.Bans.ToListAsync();
         }
 
